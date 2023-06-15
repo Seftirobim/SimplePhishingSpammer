@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
 ## SCREENSHOT
 
 
+![Screenshot](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/d1a1e619-c221-49ce-a3c7-80d0424a57a6)
 
 
 
