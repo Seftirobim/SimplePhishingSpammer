@@ -1,6 +1,6 @@
 # SimplePhishingSpammer
 
-SimplePhishingSpammer adalah simple bot otomatis untuk spam web phishing dengan 2 input form username dan password,atau bisa di kustomisasi !
+SimplePhishingSpammer adalah simple bot otomatis untuk spam web phishing simple login form dengan 2 input username dan password,atau bisa di kustomisasi !
 
   - Dibuat dengan Python 3
   - Random username dan password
