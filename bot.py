@@ -61,7 +61,6 @@ def fill_submit_form(url):
 title = 'Simple Phising Spammer '
 print(drawLine('+'))
 print(str.center(title, allign_center(title)))
-print(str.center('github.com/v3lip/PhishingSpammer', allign_center('github.com/v3lip/PhishingSpammer')))
 print(drawLine('+'))
 
 #INPUT
