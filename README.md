@@ -63,12 +63,3 @@ $ pip3 install -r requirements.txt
 ```
 
 
-### Development
-
-Bebas berkontribusi
-
-### Donate
-
-Want to buy me a cendol ?
-
-<a href="https://trakteer.id/seftirobi.m/tip" target="_blank"><img id="wse-buttons-preview" src="https://cdn.trakteer.id/images/embed/trbtn-black-4.png" height="40" style="border:0px;height:40px;" alt="Trakteer Saya"></a>
