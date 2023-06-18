@@ -10,7 +10,7 @@ SimplePhishingSpammer adalah simple bot otomatis untuk spam web phishing simple 
   
 ### NOTE
 
-Script ini dibuat secara coba - coba dri modifikasi script yang didapetin dri chatGPT dan beberapa fungsi saya ambil dari https://github.com/v3lip/PhishingSpammer, dan script bot spam pertama menggunakan python
+Script ini dibuat secara coba - coba dri modifikasi script yang didapetin dri chatGPT dan beberapa fungsi saya ambil dari https://github.com/v3lip/PhishingSpammer
 
 Sebagai contoh atau mau coba - coba dulu ada file php form submit sederhana di folder 'tes_spam'
 - buat database dan tablenya
