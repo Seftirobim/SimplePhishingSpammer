@@ -80,7 +80,7 @@ def fill_submit_form(url):
 		if (s == 0):
 			console.print("Gagal di spam!",style="red1")
 		else:
-			console.print('Berhasil di spam {} kali ke {} !'.format(s-1, Targeturl),style="bold spring_green1")
+			console.print('Berhasil di spam {} kali ke {} ! <- Keyboard Interupt'.format(s-1, Targeturl),style="bold spring_green1")
 	
 
 
