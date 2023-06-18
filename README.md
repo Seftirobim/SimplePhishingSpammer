@@ -28,29 +28,23 @@ CREATE TABLE IF NOT EXISTS tb_user (
 ```
 
 
-## SCREENSHOT
+## Screenshots
 
-
-![Screenshot](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/d1a1e619-c221-49ce-a3c7-80d0424a57a6)
-
+![botspam1](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/6e97f3a0-b5d1-442e-b3ea-ef8756d73f87)
+![botspam2](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/dbe0cd3e-c99c-482b-86bd-32474b0a6eb7)
 
 
 ## How to use
 
-Install dulu python-nya (kalo belum ada)
+- Install dulu python-nya (kalo belum ada)
+- jalankan script 
 
-jalankan script 
 ```sh
 $ python bot.py
 ```
-Akan ada beberapa pertanyaan
+- masukan target url
 
-    - 'attribute name value for (username) ?' - masukan value dari attribute name field 'username'     
-    - 'attribute name value for (username) ?' - masukan value dari attribute name field 'password'
-    - 'What is target url ?' - Masukan target url contoh : https://www.example.com/submit
-          
-
-## Installation requirement (kalo belum ada) 
+## Installation requirements 
 
 Windows:
 ```sh
