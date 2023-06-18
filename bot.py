@@ -64,7 +64,7 @@ def fill_submit_form(url):
 				push_data = requests.post(url, data=data)
 
 				if push_data.status_code == 200:
-					console.log(f"Spam ke {s} dengan username: {username} dan password: {password}",style="red1")
+					console.log(f"Spam ke {s} dengan username: {username} dan password: {password}",style="bright_green")
 				else:
 					console.print("Koneksi Timeout, mencoba lagi dalam beberapa detik...",style="bright_cyan")
 					time.sleep(3) 
