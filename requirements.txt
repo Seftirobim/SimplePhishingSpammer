@@ -1,3 +1,5 @@
+beautifulsoup4==4.12.2
+bs4==0.0.1
 ﻿certifi==2023.5.7
 chardet==3.0.4
 colorama==0.4.6
