@@ -41,6 +41,23 @@ def generate_random_string(length):
     letters = string.ascii_letters + string.digits
     return ''.join(random.choice(letters) for _ in range(length))
 
+# get random username from file
+def get_random_username():
+
+	user_file = 'usernames.txt'
+	with open(user_file,"r",encoding="utf8") as file:
+		usernames = file.read().splitlines()
+	return random.choice(usernames)
+
+#get random password from file
+def get_random_pass():
+
+	pass_file= 'passwords.txt'
+	with open(pass_file,"r",encoding="utf8") as file:
+		passwords = file.read().splitlines()
+	return random.choice(passwords)
+
+	
 console = Console(log_path=False)
 def fill_submit_form(url):
 
@@ -49,13 +66,22 @@ def fill_submit_form(url):
 		s = 1
 		while True:
 			try:
+				
 				resp = requests.get(Targeturl)
 				soup = BeautifulSoup(resp.content,'html.parser')
 				findInputText = soup.find('input',{'type':'text'})
 				findInputPass = soup.find('input',{'type':'password'})
 
-				username = generate_random_string(10) # ubah panjang username sesuai kemauan
-				password = generate_random_string(12) # ubah panjang username sesuai kemauan
+				username = get_random_username()
+				random_string = generate_random_string(8)
+				join_pass =  get_random_pass()+random_string
+
+				length = 12 # atur maksimal panjang password
+				if len(join_pass) <= length:
+					password = join_pass
+				else:
+					kurangi = len(join_pass)-length
+					password = join_pass[: - kurangi]
 
 				data = {
 					findInputText : username,
