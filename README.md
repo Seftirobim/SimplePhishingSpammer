@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
 $ python bot.py
 ```
 - masukan target url
-- Kalo koneksinya timeout/error script akan memulai lg dlam beberapa detik (bisa jadi koneksi kita atau web phishingnya dibikin down sama empunya 😁)
+- Kalo koneksinya timeout/error script akan memulai lg dlam beberapa detik sampai terkoneksi lagi (bisa jadi dari koneksi kita atau web phishingnya dibikin down sama empunya)
 
 ## Installation requirements 
 
