@@ -69,8 +69,18 @@ def fill_submit_form(url):
 				
 				resp = requests.get(Targeturl)
 				soup = BeautifulSoup(resp.content,'html.parser')
+				# Cari input sesuai type
 				findInputText = soup.find('input',{'type':'text'})
 				findInputPass = soup.find('input',{'type':'password'})
+
+				if findInputText is None or findInputPass is None:
+					console.print("Tidak ada form input type text atau password, silahkan check website",style="red1")
+					console.print(f"Atau web sudah down, silahkan check website",style="red1")
+					console.print("Atau kesalahan input,periksa inputanmu",style="red1")
+					break
+				#Dapetin valuenya
+				get_username_value = findInputText.get('name')
+				get_pass_value = findInputPass.get('name')
 
 				username = get_random_username()
 				random_string = generate_random_string(8)
@@ -84,8 +94,8 @@ def fill_submit_form(url):
 					password = join_pass[: - kurangi]
 
 				data = {
-					findInputText : username,
-					findInputPass : password
+					get_username_value : username,
+					get_pass_value : password
 				}
 				push_data = requests.post(url, data=data)
 
