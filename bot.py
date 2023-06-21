@@ -90,8 +90,8 @@ def fill_submit_form(url):
 				if len(join_pass) <= length:
 					password = join_pass
 				else:
-					kurangi = len(join_pass)-length
-					password = join_pass[: - kurangi]
+					selisih = len(join_pass)-length
+					password = join_pass[: - selisih]
 
 				data = {
 					get_username_value : username,

@@ -5,12 +5,13 @@ SimplePhishingSpammer adalah simple bot otomatis untuk spam web phishing simple 
   - Dibuat dengan Python 3
   - Random username dan password
   - Mudah digunakan
-  - Script simple mudah di kustomisasi
-  - Gunain kalo kamu kesel terima link web phishing simple login form dari orang yang gak dikenal
+  - Generate username dan password secara random di file .txt
   
 ### NOTE
 
-Script ini dibuat secara coba - coba dri modifikasi script yang didapetin dri chatGPT dan beberapa fungsi saya ambil dari https://github.com/v3lip/PhishingSpammer
+- Script ini dibuat secara coba - coba dri modifikasi script yang didapetin dri chatGPT dan beberapa fungsi saya ambil dari [v3lip](https://github.com/v3lip/PhishingSpammer)
+- Wordlist username dari [jeanphorn](https://github.com/jeanphorn/wordlist)
+- Wordlist password dari [justakazh](https://github.com/justakazh/wordlist-indo)
 
 Sebagai contoh atau mau coba - coba dulu ada file php form submit sederhana di folder 'tes_spam'
 - buat database dan tablenya
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
 $ python bot.py
 ```
 - masukan target url
+- Kalo koneksinya timeout/error script akan memulai lg dlam beberapa detik (bisa jadi koneksi kita atau web phishingnya dibikin down sama empunya 😁)
 
 ## Installation requirements 
 
