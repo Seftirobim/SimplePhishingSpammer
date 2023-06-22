@@ -74,10 +74,10 @@ def fill_submit_form(url):
 				findInputPass = soup.find('input',{'type':'password'})
 
 				if findInputText is None or findInputPass is None:
-					console.print("Tidak ada form input type text atau password, silahkan check website",style="red1")
-					console.print(f"Atau web sudah down, silahkan check website",style="red1")
-					console.print("Atau kesalahan input,periksa inputanmu",style="red1")
-					break
+					console.print("Tidak ada form input type text atau password | Atau web sudah down silahkan check website | Atau kesalahan input,periksa inputanmu",style="red1")
+					console.print("Sedang menghubungkan lagi...",style="spring_green1")
+					time.sleep(5)
+					continue
 				#Dapetin valuenya
 				get_username_value = findInputText.get('name')
 				get_pass_value = findInputPass.get('name')
