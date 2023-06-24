@@ -6,14 +6,22 @@ import time
 from bs4 import BeautifulSoup
 from rich.console import Console
 from rich.markdown import Markdown
+from rich.table import Table
+from rich.table import box 
+from rich.align import Align 
 
-
-
-#FUNCTIONS
+menu_options = {
+   1: 'Random user & password',
+   2: 'Random user & password with gmail domain',
+   3: 'Random user & password with random domain',
+   4: 'Exit',
+}
+random_domain = ['gmail.com','hotmail.com','outlook.com','live.com','email.com','yahoo.com','icloud.com','msn.com','edu.com','free.fr','web.de','mail.ru']
 title_markdown = """
-# Simple Phishing Spammer |  Ctrl + C for interupt
+# Simple Phishing Spammer |  Ctrl + C for interupt Spamming
 """
 md = Markdown(title_markdown)
+console = Console(log_path=False)
 
 SRM_logo = """
   █████████  ███████████   ██████   ██████
@@ -25,6 +33,17 @@ SRM_logo = """
 ░░█████████  █████   █████ █████     █████
  ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░     ░░░░░                                                                                            
 """
+#FUNCTIONS
+def print_menu():
+
+    table = Table(box=box.SIMPLE_HEAD)
+    table.add_column("No",justify="center",style='bold bright_yellow')
+    table.add_column("Options",justify="center",style='gold1')
+
+    for key in menu_options.keys():
+        table.add_row('['+str(key)+']',Align(menu_options[key],'left'))
+    console.print(table)
+    
 def drawLine(symbol):
     rows, columns = os.get_terminal_size()
     i = symbol
@@ -39,7 +58,7 @@ def print_title():
 
 def generate_random_string(length):
     letters = string.ascii_letters + string.digits
-    return ''.join(random.choice(letters) for _ in range(length))
+    return ''.join(random.choices(letters, k=length))
 
 # get random username from file
 def get_random_username():
@@ -58,8 +77,8 @@ def get_random_pass():
 	return random.choice(passwords)
 
 	
-console = Console(log_path=False)
-def fill_submit_form(url):
+
+def fill_submit_form(url,mail_format):
 
 	try:
 		#COUNTING LOOP
@@ -78,21 +97,28 @@ def fill_submit_form(url):
 					console.print("Sedang menghubungkan lagi...",style="spring_green1")
 					time.sleep(5)
 					continue
-				#Dapetin valuenya
+				#Dapetin valuenya dari attribute name
 				get_username_value = findInputText.get('name')
 				get_pass_value = findInputPass.get('name')
 
-				username = get_random_username()
+				if mail_format is None: username = get_random_username()
+				elif mail_format == 'gmail': username = get_random_username()+"@gmail.com"
+				else: username = get_random_username()+'@'+random.choice(random_domain)
+					
 				random_string = generate_random_string(8)
-				join_pass =  get_random_pass()+random_string
+				rm_random_pass_spaces = get_random_pass().replace(" ","") #remove spaces
+				join_pass =  ''.join([rm_random_pass_spaces,random_string])
 
-				length = 12 # atur maksimal panjang password
-				if len(join_pass) <= length:
-					password = join_pass
-				else:
-					selisih = len(join_pass)-length
+				min = 9 # atur panjang minimal password
+				max = 13 # atur panjang maximal password
+				if len(rm_random_pass_spaces) == min: password = rm_random_pass_spaces
+				elif len(rm_random_pass_spaces) < min:
+					selisih = len(join_pass)-min
+					password = join_pass[: - selisih] 
+				elif len(rm_random_pass_spaces) > min:
+					selisih = len(join_pass)-max
 					password = join_pass[: - selisih]
-
+				
 				data = {
 					get_username_value : username,
 					get_pass_value : password
@@ -113,20 +139,38 @@ def fill_submit_form(url):
 	except KeyboardInterrupt:
 		#Shows the total number of spammed login attempts
 		print(drawLine('='))
-		if (s == 0):
+		if (s-1 == 0):
 			console.print("Gagal di spam!",style="red1")
 		else:
 			console.print('Berhasil di spam {} kali ke {} ! <- Keyboard Interupt'.format(s-1, Targeturl),style="bold spring_green1")
-	
 
 
-#Terminal header
+# RUN PROGRAM
+# Terminal header
 print_title()
+print_menu()
+    
 
-#INPUT
-# input_username = input ("attribute name value for (username) ? : ") 
-# input_password = input ("attribute name value for (password) ? : ")
-Targeturl = input ("Enter Target Url : ")
-
-#RUN PROGRAM
-fill_submit_form(Targeturl)
+while True:
+	option = ''
+	try:
+		option = int(input("Select an option between [1-4] : "))
+	except:
+		None
+	if option == 1:
+		Targeturl = input ("Enter Target Url : ")
+		fill_submit_form(Targeturl,None)
+		break
+	elif option == 2:
+		Targeturl = input ("Enter Target Url : ")
+		fill_submit_form(Targeturl,'gmail')
+		break
+	elif option == 3:
+		Targeturl = input ("Enter Target Url : ")
+		fill_submit_form(Targeturl,"random")
+		break
+	elif option == 4:
+		console.print("Exit!",style="bold red1")
+		break
+	else:
+		console.print("Invalid input ! Choose an option beetween [1-4]",style="cyan")
