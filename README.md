@@ -29,9 +29,8 @@ CREATE TABLE IF NOT EXISTS tb_user (
 
 
 ## Screenshots
-
-![botspam1](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/6e97f3a0-b5d1-442e-b3ea-ef8756d73f87)
-![botspam2](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/dbe0cd3e-c99c-482b-86bd-32474b0a6eb7)
+![image](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/06c1c22f-1056-4a9a-b52f-196bc44c4768)
+![image](https://github.com/Seftirobim/SimplePhishingSpammer/assets/16395774/4da0e817-ef0b-4e45-979e-190f6c4be968)
 
 
 ## How to use
@@ -43,6 +42,7 @@ CREATE TABLE IF NOT EXISTS tb_user (
 $ python bot.py
 ```
 - Enter the target URL
+- Enter an option
 - If the connection times out or encounters an error, the script will retry after a few seconds until it is successfully connected again (this can be due to our own connection or if the phishing website is temporarily down).
 
 ## Installation requirements 
@@ -59,6 +59,11 @@ $ pip3 install -r requirements.txt
 
 # Changelog
 
+## [v0.3.0]
+
+- Adding an option that can be chosen by the user.
+- Bug Fixing
+  
 ## [v0.2.0]
 
 - Randomly picks username and password from a .txt file
