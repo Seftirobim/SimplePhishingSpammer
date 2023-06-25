@@ -85,8 +85,11 @@ def fill_submit_form(url,mail_format):
 		s = 1
 		while True:
 			try:
-				
-				resp = requests.get(Targeturl)
+				headers = requests.utils.default_headers()
+				headers.update({
+					"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+				})
+				resp = requests.get(Targeturl,headers=headers)
 				soup = BeautifulSoup(resp.content,'html.parser')
 				# Cari input sesuai type
 				findInputText = soup.find('input',{'type':'text'})
