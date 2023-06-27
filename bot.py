@@ -1,8 +1,4 @@
-import requests
-import os
-import random
-import string
-import time
+import requests,os,random,string,time
 from bs4 import BeautifulSoup
 from rich.console import Console
 from rich.markdown import Markdown
