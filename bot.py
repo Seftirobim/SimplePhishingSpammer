@@ -10,17 +10,25 @@ from rich.table import Table
 from rich.table import box 
 from rich.align import Align 
 
+### GLOBAL VARIABLE
 menu_options = {
    1: 'Random user & password',
    2: 'Random user & password with gmail domain',
    3: 'Random user & password with random domain',
    4: 'Exit',
 }
+
+headers = requests.utils.default_headers()
+headers.update({
+	"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
+})
 random_domain = ['gmail.com','hotmail.com','outlook.com','live.com','email.com','yahoo.com','icloud.com','msn.com','edu.com','free.fr','web.de','mail.ru']
 title_markdown = """
 # Simple Phishing Spammer |  Ctrl + C for interupt Spamming
 """
+
 md = Markdown(title_markdown)
+
 console = Console(log_path=False)
 
 SRM_logo = """
@@ -33,6 +41,8 @@ SRM_logo = """
 ░░█████████  █████   █████ █████     █████
  ░░░░░░░░░  ░░░░░   ░░░░░ ░░░░░     ░░░░░                                                                                            
 """
+### END GLOBAL VARIABLE
+
 #FUNCTIONS
 def print_menu():
 
@@ -76,7 +86,15 @@ def get_random_pass():
 		passwords = file.read().splitlines()
 	return random.choice(passwords)
 
+#get HTML content
+def get_html_content(url):
 	
+	resp = requests.get(url,headers=headers)
+	return BeautifulSoup(resp.content,'html.parser')
+
+#find Input with type from HTML content
+def find_input_type(url,type):
+	return get_html_content(url).find('input',{'type':type})
 
 def fill_submit_form(url,mail_format):
 
@@ -85,24 +103,18 @@ def fill_submit_form(url,mail_format):
 		s = 1
 		while True:
 			try:
-				headers = requests.utils.default_headers()
-				headers.update({
-					"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36",
-				})
-				resp = requests.get(Targeturl,headers=headers)
-				soup = BeautifulSoup(resp.content,'html.parser')
-				# Cari input sesuai type
-				findInputText = soup.find('input',{'type':'text'})
-				findInputPass = soup.find('input',{'type':'password'})
+				# Find Type from input
+				findTypeText = find_input_type(url,'text')
+				findTypePass = find_input_type(url,'password')
+				# get The Value
+				getValText = findTypeText.get('name')
+				getValPass = findTypePass.get('name')
 
-				if findInputText is None or findInputPass is None:
+				if findTypeText is None or findTypePass is None:
 					console.print("Tidak ada form input type text atau password | Atau web sudah down silahkan check website | Atau kesalahan input,periksa inputanmu",style="red1")
 					console.print("Sedang menghubungkan lagi...",style="spring_green1")
 					time.sleep(5)
 					continue
-				#Dapetin valuenya dari attribute name
-				get_username_value = findInputText.get('name')
-				get_pass_value = findInputPass.get('name')
 
 				if mail_format is None: username = get_random_username()
 				elif mail_format == 'gmail': username = get_random_username()+"@gmail.com"
@@ -114,6 +126,8 @@ def fill_submit_form(url,mail_format):
 
 				min = 9 # atur panjang minimal password
 				max = 13 # atur panjang maximal password
+
+				# Adding a random string if it meets the criteria.
 				if len(rm_random_pass_spaces) == min: password = rm_random_pass_spaces
 				elif len(rm_random_pass_spaces) < min:
 					selisih = len(join_pass)-min
@@ -123,10 +137,10 @@ def fill_submit_form(url,mail_format):
 					password = join_pass[: - selisih]
 				
 				data = {
-					get_username_value : username,
-					get_pass_value : password
+					getValText : username,
+					getValPass : password
 				}
-				push_data = requests.post(url, data=data)
+				push_data = requests.post(url, data=data,headers=headers)
 
 				if push_data.status_code == 200:
 					console.log(f"Spam ke {s} dengan username: {username} dan password: {password}",style="bright_green")
@@ -134,11 +148,11 @@ def fill_submit_form(url,mail_format):
 					console.print("Koneksi Timeout, mencoba lagi dalam beberapa detik...",style="bright_cyan")
 					time.sleep(3) 
 				s += 1
-				#time.sleep(0.2)
 
 			except (requests.exceptions.ConnectionError,requests.Timeout, requests.RequestException):
 				console.print("Koneksi Timeout, mencoba lagi dalam beberapa detik...",style="bright_cyan")
-				time.sleep(3) 
+				time.sleep(3)
+				 
 	except KeyboardInterrupt:
 		#Shows the total number of spammed login attempts
 		print(drawLine('='))
@@ -152,7 +166,6 @@ def fill_submit_form(url,mail_format):
 # Terminal header
 print_title()
 print_menu()
-    
 
 while True:
 	option = ''
